@@ -1,0 +1,16 @@
+{
+  "name": "Code Test Backend",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/backend",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-spring-initializr",
+        "vscjava.vscode-spring-boot-dashboard"
+      ]
+    }
+  },
+  "remoteUser": "root"
+}

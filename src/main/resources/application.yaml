@@ -1,0 +1,49 @@
+server:
+  port: 4000
+  shutdown: "graceful"
+
+# If you want to use a database then uncomment the `group:, readiness: and include: "db"`
+# lines in the health probes and uncomment the datasource section
+management:
+  endpoint:
+    health:
+      show-details: "always"
+      # group:
+      #  readiness:
+      #   include: "db"
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: info # should we have more?
+
+springdoc:
+  packagesToScan: uk.gov.hmcts.reform.dev.controllers
+  writer-with-order-by-keys: true
+
+spring:
+  config:
+    import: "optional:configtree:/mnt/secrets/test/"
+  application:
+    name: Dev Test
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/code_test_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    hikari:
+      minimumIdle: 2
+      maximumPoolSize: 10
+      idleTimeout: 10000
+      maxLifetime: 7200000
+      connectionTimeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
